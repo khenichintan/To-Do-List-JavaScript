@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to do list</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .parent {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: #050110;
+        }
+        
+        .task-item {
+            width: 200px;
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 10px;
+        }
+        
+        .task-item span {
+            text-align: right;
+        }
+        
+        .task-item p {
+            text-align: center;
+        }
+        
+        .task-item h3 {
+            text-align: center;
+        }
+        
+        .mystyle {
+            text-decoration: line-through;
+        }
+        
+        table {
+            color: #fff;
+            padding: 20px;
+            background-color: rgba(240, 248, 255, 0.115);
+            border: 1px solid #000;
+            box-shadow: 2px 8px 30px 4px black;
+            width: 450px;
+            border-radius: 8px;
+        }
+        
+        td {
+            display: block;
+            border-radius: 10px;
+            padding: 10px 15px;
+            margin: 10px 0;
+            width: 100%;
+            background-color: #fefefe06;
+            box-shadow: 0 0 8px 5px rgba(0, 0, 0, 0.201);
+        }
+        
+        input:not(input[type="checkbox"]) {
+            border-radius: 5px;
+            width: 100%;
+            background-color: #00000024;
+            border: none;
+            border: 1px solid #000;
+            padding: 5px 8px;
+            font-size: 16px;
+            color: white;
+            outline: none;
+        }
+        
+        input[type="checkbox"] {
+            margin-right: 8px;
+            margin-bottom: 5px;
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+        
+        label[for="datech"] {
+            margin: 0;
+        }
+        
+        input:focus {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid #fff;
+            box-shadow: 0 0 4px 5px rgba(86, 86, 86, 0.073);
+        }
+        
+        label {
+            display: inline-block;
+            font-size: 20px;
+            text-transform: capitalize;
+            margin-bottom: 8px;
+        }
+        
+        a {
+            display: inline-block;
+            padding: 8px 18px;
+            font-size: 18px;
+            text-transform: capitalize;
+            border-radius: 5px;
+            background-color: #ffffff9d;
+            color: #000;
+            border: 2px solid #000;
+            text-decoration: none;
+            margin-right: 5px;
+        }
+        
+        a:hover {
+            background-color: #fff;
+            box-shadow: 0 0 10px 0px #ffffff42;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <table>
+            <tr>
+                <td><label for="">task: </label><input type="text" id="task" placeholder="Enter Task..."></td>
+            </tr>
+            <tr>
+                <td><label for="">type: </label>
+                    <select name="" id="type">
+                        <option value="">--select type--</option>
+                        <option value="stdy">study</option>
+                        <option value="shoping">shoping</option>
+                        <option value="office">office</option>
+                        <option value="other">other</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="">date: </label><input type="date" id="date"></td>
+            </tr>
+            <!-- <tr>
+                <td class="ch"><input type="checkbox" name="" id="datech" onclick="adddat()"><label for="datech">select date menualy</label></td>
+            </tr> -->
+            <tr>
+                <td style="background-color: transparent;box-shadow: none; text-align: center;"><a href="#" id="add">add task</a><a href="show.html" id="add">show task</a></td>
+            </tr>
+        </table>
+
+    </div>
+    <script>
+        let task = document.querySelector("#task");
+        let type = document.querySelector("#type");
+        let date = new Date();
+        var dat = document.querySelector("#date");
+        dat.value = date.getDate() + " / " + date.getMonth() + " / " + date.getFullYear();
+        let btn = document.querySelector("#add");
+        let uid = document.querySelector("#uid");
+        let data = [];
+        btn.addEventListener("click", () => {
+            var ntask = {
+                task: task.value,
+                type: type.value,
+                date: dat.value,
+                uid: Math.ceil(Math.random() * 1000)
+            }
+            data.push(ntask);
+            task.value = "";
+            type.value = "";
+            date.value = "";
+            localStorage.setItem("task", JSON.stringify(data));
+        })
+        localStorage.setItem("task", JSON.stringify(data));
+        //date
+        // function adddat() {
+        //     var d = document.querySelector("#datech");
+        //     if (d.checked == true) {
+        //         dat.type = 'date';
+        //     } else {
+        //         dat.type = 'text';
+        //         dat.value = date.getDate() + " / " + date.getMonth() + " / " + date.getFullYear();
+
+        //     }
+        // }
+    </script>
+</body>
+
+</html>

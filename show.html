@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>your task</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .parent{
+            width: 100%;
+            height: 100vh;
+            background-color: #050110;
+        }
+        #res{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .task-item{
+            min-width: 350px; 
+            border: 1px solid #000; 
+            padding:15px 10px ;
+            margin: 10px;
+            color: #fff;
+            background-color: rgba(240, 248, 255, 0.115);
+            border-radius: 5px;
+        }
+        .task-item span{
+            text-align: right;
+        }
+        .task-item p{
+            text-align: center;
+            font-size: 22px;
+            text-transform: capitalize;
+            margin: 10px 0;
+        }
+        .task-item h3{
+            text-align: center;
+            font-size: 20px;
+            text-transform: capitalize;
+        }
+        .mystyle{
+            text-decoration: line-through;
+        }
+        button{
+            background-color: transparent;
+            color: red;
+            float: right;
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div id="res"></div>
+    </div>
+<script>
+    print()
+            //print
+            function print() {
+            var ldata = JSON.parse(localStorage.getItem("task"));
+            var div=``;
+            ldata.filter((v) => {
+                div += `
+                <div  class="task-item"
+        <span>${v.date}</span>
+        <p>${v.task}</p>
+        <h3>${v.type}</h3>
+        <input type="checkbox" id="complate" onclick="this.parentElement.classList.toggle('mystyle');">
+        <button  onclick="deletfun(${v.uid})"><i class="fa-solid fa-trash-can"></i></button>
+                </div>`
+            })
+            div+=``
+            document.querySelector("#res").innerHTML = div;
+        }
+        
+        function deletfun(id){
+            
+            var ldata=JSON.parse(localStorage.getItem("task"));
+            var ndata=ldata.filter((v,i)=>{
+                // uid.value=v.uid;
+                if(v.uid!=id){
+                    return v;
+                }
+            })
+            localStorage.setItem("task",JSON.stringify(ndata));
+            print()
+        }
+          
+ 
+</script>
+</body>
+</html>
